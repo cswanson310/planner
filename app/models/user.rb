@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
     return nil
   end
 
+  def display_name
+    "#{first_name} #{last_name}"
+  end
+
   private
   # This is where the real work is done, store the BCrypt has in the
   # database
