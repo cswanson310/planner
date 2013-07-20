@@ -27,3 +27,18 @@ Planner::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 end
+
+# Add this to the end of your development.rb and add 
+#
+# gem 'pry'
+#
+# to your Gemfile and run bundle to install.
+
+silence_warnings do
+  begin
+    require 'pry'
+    IRB = Pry
+  rescue LoadError
+  end
+end
+
