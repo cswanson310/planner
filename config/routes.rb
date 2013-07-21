@@ -3,11 +3,11 @@ Planner::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'user_sessions#new'
+  root 'users#new'
 
   resources :user_sessions, only: [:new, :create, :destroy]
 
-  resources :users, only: [:show]
+  resources :users, only: [:show, :new, :create]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

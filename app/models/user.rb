@@ -14,9 +14,10 @@ class User < ActiveRecord::Base
 
   # We need to validate that the user has typed the same password twice
   # but we only want to do the validation if they've opted to change their password.
-  validates_confirmation_of :new_password, :if=>:password_changed?
+  validates_confirmation_of :new_password, if: :password_changed?, message: "Passwords don't match"
 
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, message: 'That email has already been taken'
+  validate :cant_be_test, on: :create, message: 'test message'
 
   before_save :hash_new_password, :if=>:password_changed?
 
@@ -48,6 +49,9 @@ class User < ActiveRecord::Base
   end
 
   private
+  def cant_be_test(options = {})
+    self.errors.add(:email, 'testing')
+  end
   # This is where the real work is done, store the BCrypt has in the
   # database
   def hash_new_password
