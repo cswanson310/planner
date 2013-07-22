@@ -11,16 +11,16 @@ class ApplicationController < ActionController::Base
 
   protected
 
-    def authorize
-      unless User.find_by_id(session[:user_id])
-        redirect_to login_url, notice: "Please log in"
-      end
+  def authorize
+    unless User.find_by_id(session[:user_id])
+      redirect_to login_url, notice: "Please log in"
     end
+  end
 
   private
 
-    def current_user
-      @current_user ||= User.find_by_id(session[:user_id])
-    end
+  def current_user
+    @current_user ||= User.find_by_id(session[:user_id])
+  end
 
 end

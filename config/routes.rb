@@ -6,8 +6,11 @@ Planner::Application.routes.draw do
   root 'users#new'
 
   resources :user_sessions, only: [:new, :create, :destroy]
+  get 'login', to: 'user_sessions#new', as: :login
 
   resources :users, only: [:show, :new, :create]
+
+  resources :notes, only: [:new, :create]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

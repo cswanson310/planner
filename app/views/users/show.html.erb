@@ -1,1 +1,17 @@
 <h1>Logged in as <%= @user.display_name %></h1>
+
+<h2>Notes:</h2>
+
+<% @user.notes.each do |note| %>
+  <div id='<%= note.id %>' class='note'>
+    <p class='note_title'><%= note.title %></p>
+    <p class='note_body'><%= note.body %></p>
+    <ul>
+      <% note.tag_categories.each do |tag_category| %>
+        <li class='note_tag'><%= tag_category.name %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= link_to "new note", new_note_path(day_id: @day.id, user_id: @user.id) %>

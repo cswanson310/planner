@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @day = Day.find_or_create_by_date_and_user_id(Date.today, @user.id)
   end
 
   protected

@@ -1,0 +1,14 @@
+<div id='note_form'>
+  <%= form_for @note do |n| %>
+    <div>
+      <%= n.text_field :title, placeholder: 'Title' %>
+    </div>
+    <div>
+      <%= n.text_area :body, placeholder: 'What are you thinking?' %>
+    </div>
+    <div>
+      <%= n.submit 'Create!' %>
+    </div>
+  <% end %>
+</div>
+
