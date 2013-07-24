@@ -1,0 +1,11 @@
+<div id='track_category_form'>
+  <%= form_for @track_category do |t| %>
+    <div>
+      <%= t.text_field :name %>
+    </div>
+
+    <div>
+      <%= t.submit 'Add Category!'%>
+    </div>
+  <% end %>
+</div>

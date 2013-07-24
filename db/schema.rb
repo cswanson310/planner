@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130720210129) do
+ActiveRecord::Schema.define(version: 20130722033901) do
 
   create_table "days", force: true do |t|
     t.integer  "user_id",    null: false
@@ -57,6 +57,14 @@ ActiveRecord::Schema.define(version: 20130720210129) do
   add_index "tag_categories", ["note_tag_id"], name: "index_tag_categories_on_note_tag_id"
   add_index "tag_categories", ["trackable_tag_id"], name: "index_tag_categories_on_trackable_tag_id"
 
+  create_table "track_categories", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "track_categories", ["name"], name: "index_track_categories_on_name"
+
   create_table "trackable_tags", force: true do |t|
     t.integer  "trackable_id",    null: false
     t.integer  "tag_category_id", null: false
@@ -68,7 +76,6 @@ ActiveRecord::Schema.define(version: 20130720210129) do
   add_index "trackable_tags", ["trackable_id"], name: "index_trackable_tags_on_trackable_id"
 
   create_table "trackables", force: true do |t|
-    t.string   "category",         null: false
     t.integer  "user_id"
     t.integer  "day_id"
     t.text     "name"
@@ -77,9 +84,9 @@ ActiveRecord::Schema.define(version: 20130720210129) do
     t.integer  "trackable_tag_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "track_category_id"
   end
 
-  add_index "trackables", ["category"], name: "index_trackables_on_category"
   add_index "trackables", ["day_id"], name: "index_trackables_on_day_id"
   add_index "trackables", ["name"], name: "index_trackables_on_name"
   add_index "trackables", ["trackable_tag_id"], name: "index_trackables_on_trackable_tag_id"

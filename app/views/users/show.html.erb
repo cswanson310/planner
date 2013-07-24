@@ -14,4 +14,16 @@
   </div>
 <% end %>
 
-<%= link_to "new note", new_note_path(day_id: @day.id, user_id: @user.id) %>
+<% TrackCategory.all.each do |track_category| %>
+  <div id='<%= track_category.id %>' class='track_category' %>
+    <h3><%= track_category.name %></h3>
+    <ul>
+      <% Trackable.where(user_id: @user.id, track_category: track_category).each do |trackable| %>
+        <li><%= "#{trackable.name}, #{trackable.trackable_qty} #{trackable.units}" %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= link_to "new note", new_note_path %>
+<%= link_to "new trackable category", new_track_category_path %>

@@ -1,0 +1,21 @@
+<div id='trackable_form'>
+  <%= form_for @trackable do |t| %>
+    <div>
+      <%= t.text_field :name, placeholder: 'Name' %>
+    </div>
+
+    <div>
+      <%= t.number_field :trackable_qty, placeholder: 'how many?' %>
+    </div>
+
+    <div>
+      <%= t.text_field :units, placeholder: 'units' %>
+    </div>
+
+    <div>
+      <%= t.text_field :track_category_id, value: @track_category_id, style: 'display: none;' %>
+    <div>
+      <%= t.submit 'Add Trackable!'%>
+    </div>
+  <% end %>
+</div>
