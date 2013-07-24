@@ -2,7 +2,6 @@ class TrackablesController < ApplicationController
   def new
     @trackable = Trackable.new
     @track_category_id = params[:track_category_id]
-    p @track_category_id
   end
 
   def create
