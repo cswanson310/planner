@@ -48,10 +48,11 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  private
-  def cant_be_test(options = {})
-    self.errors.add(:email, 'testing')
+  def today
+    Day.find_or_create_by(date: Date.today, user_id: id)
   end
+
+  private
   # This is where the real work is done, store the BCrypt has in the
   # database
   def hash_new_password

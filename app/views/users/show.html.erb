@@ -1,6 +1,9 @@
+<% today = @user.today %>
+<h1><%= today.display_string%></h1>
+
 <h2>Notes:</h2>
 
-<% @user.notes.each do |note| %>
+<% @user.notes.where(day_id: today.id).each do |note| %>
   <div id='<%= note.id %>' class='note'>
     <p class='note_title'><%= note.title %></p>
     <p class='note_body'><%= note.body %></p>
@@ -16,10 +19,11 @@
   <div id='<%= track_category.id %>' class='track_category' %>
     <h3><%= track_category.name %></h3>
     <ul>
-      <% Trackable.where(user_id: @user.id, track_category: track_category).each do |trackable| %>
+      <% Trackable.where(user_id: @user.id, track_category: track_category, day_id: today.id).each do |trackable| %>
         <li><%= "#{trackable.name}, #{trackable.trackable_qty} #{trackable.units}" %></li>
       <% end %>
     </ul>
+    <%= link_to "add a #{track_category.name}", new_trackable_path(track_category_id: track_category.id) %>
   </div>
 <% end %>
 
