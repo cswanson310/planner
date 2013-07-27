@@ -9,7 +9,9 @@ Planner::Application.routes.draw do
   get 'login', to: 'user_sessions#new', as: :login
   get 'logout', to: 'user_sessions#destroy', as: :logout
 
-  resources :users, only: [:show, :new, :create]
+  resources :users, only: [:new, :create] do
+    resources :days, only: [:show]
+  end
   resources :notes, only: [:new, :create]
   resources :track_categories, only: [:new, :create]
   resources :trackables, only: [:new, :create]

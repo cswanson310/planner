@@ -7,6 +7,40 @@ class User < ActiveRecord::Base
   has_many :notes
   has_many :trackables
 
+  extend FriendlyId
+
+  def self.number_of_users_with_name(first, last)
+    User.where(first_name: first, last_name: last).select do |user|
+      user.friendly_id =~ /^#{first.downcase}_#{last.downcase}/
+    end.count
+  end
+
+  friendly_id :url_name, use: :slugged
+
+  def url_name
+    #check for reserved names
+    case first_name.parameterize
+    when 'new' then 'new2'
+    when 'edit' then 'edit2'
+    else generate_unique_name
+    end
+  end
+
+  def generate_unique_name
+    attempts = [first_name.downcase,
+                "#{first_name.downcase}-#{last_name.downcase}",
+                "#{first_name.downcase}_#{last_name.downcase}"]
+    i = 0
+    while i < attempts.length && User.friendly.exists?(attempts[i])
+      i += 1
+    end
+    if (i < attempts.length)
+      attempts[i]
+    else
+      "#{first_name.downcase}_#{last_name.downcase}_#{User.number_of_users_with_name(first_name, last_name)}"
+    end
+  end
+
   # Create two virtual (in memory only) attributes to hold the password and its confirmation.
   attr_accessor :new_password, :new_password_confirmation
 
@@ -17,7 +51,6 @@ class User < ActiveRecord::Base
   validates_confirmation_of :new_password, if: :password_changed?, message: "Passwords don't match"
 
   validates_uniqueness_of :email, message: 'That email has already been taken'
-  validate :cant_be_test, on: :create, message: 'test message'
 
   before_save :hash_new_password, :if=>:password_changed?
 

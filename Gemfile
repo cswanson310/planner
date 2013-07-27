@@ -35,9 +35,9 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
-gem 'pry'
-
 gem 'pry-rails'
+
+gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: 'master'
 
 # Use unicorn as the app server
 # gem 'unicorn'

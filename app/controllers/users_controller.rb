@@ -2,15 +2,20 @@ class UsersController < ApplicationController
 
   before_filter :set_user, only: [:show]
 
+  skip_filter :authorize, only: [:new, :create]
+
   def new
     @user = User.new
   end
 
   def create
-    @user = User.create(user_params)
+    @user = User.new(user_params)
     if @user.save
-      redirect_to user_path(@user)
+      session[:user_id] = @user.id
+      day = Day.find_or_create_by(user_id: @user.id, date: Date.today)
+      redirect_to user_day_path(@user, day)
     else
+      p "Errors! #{@user.errors.messages}"
       render action: 'new'
     end
   end

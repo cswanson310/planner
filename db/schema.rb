@@ -11,17 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130722033901) do
+ActiveRecord::Schema.define(version: 20130727085138) do
 
   create_table "days", force: true do |t|
     t.integer  "user_id",    null: false
     t.date     "date",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   add_index "days", ["date"], name: "index_days_on_date"
+  add_index "days", ["slug"], name: "index_days_on_slug"
   add_index "days", ["user_id"], name: "index_days_on_user_id"
+
+  create_table "friendly_id_slugs", force: true do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 40
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "note_tags", force: true do |t|
     t.integer  "note_id",         null: false
@@ -99,9 +114,11 @@ ActiveRecord::Schema.define(version: 20130722033901) do
     t.string   "hashed_password", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   add_index "users", ["email"], name: "index_users_on_email"
   add_index "users", ["last_name"], name: "index_users_on_last_name"
+  add_index "users", ["slug"], name: "index_users_on_slug"
 
 end
