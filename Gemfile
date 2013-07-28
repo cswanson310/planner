@@ -39,6 +39,19 @@ gem 'pry-rails'
 
 gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: 'master'
 
+gem 'rspec-rails', group: [:test, :development]
+
+group :test do
+  gem "factory_girl_rails", "~> 4.0"
+  gem "launchy"
+  gem "capybara"
+  gem "rb-fsevent", :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem "guard-rspec"
+  gem "guard-livereload"
+  gem "spork"
+  gem "guard-spork"
+end
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
