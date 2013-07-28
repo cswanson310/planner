@@ -8,8 +8,7 @@ class UserSessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user and User.authenticate(params[:email], params[:password])
       session[:user_id] = user.id
-      day = Day.find_or_create_by(user_id: user.id, date: Date.today)
-      redirect_to user_day_path(user, day)
+      redirect_to user_day_path(user, current_day)
     else
       redirect_to new_user_session_path, alert: "Invalid user/password combination"
     end

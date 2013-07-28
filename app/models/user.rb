@@ -90,6 +90,8 @@ class User < ActiveRecord::Base
   # database
   def hash_new_password
     self.hashed_password = BCrypt::Password.create(@new_password)
+    @new_password = nil
+    @new_password_confirmation = nil
   end
 
 end

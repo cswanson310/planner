@@ -12,16 +12,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      day = Day.find_or_create_by(user_id: @user.id, date: Date.today)
-      redirect_to user_day_path(@user, day)
+      flash[:notice] = "Successfully registered!"
+      redirect_to user_day_path(@user, current_day)
     else
-      p "Errors! #{@user.errors.messages}"
       render action: 'new'
     end
-  end
-
-  def show
-    @day = Day.find_or_create_by_date_and_user_id(Date.today, @user.id)
   end
 
   protected

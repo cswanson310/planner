@@ -1,15 +1,14 @@
 class NotesController < ApplicationController
 
   def new
-    p id_params
     @note = Note.new(id_params)
-    p @note.day_id
   end
 
   def create
     @note = Note.create(note_params.merge(id_params))
     if @note.save
-      redirect_to user_path(current_user)
+      flash[:notice] = "Note successfully created"
+      redirect_to user_day_path(current_user, current_day)
     else
       render action: 'new'
     end

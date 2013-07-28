@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def current_day
+    @current_day ||= Day.find_or_create_by(user_id: current_user.id, date: Date.today)
+  end
+
   def current_user
     @current_user ||= User.find_by_id(session[:user_id])
   end

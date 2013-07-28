@@ -42,6 +42,7 @@ gem 'friendly_id', github: 'FriendlyId/friendly_id', branch: 'master'
 gem 'rspec-rails', group: [:test, :development]
 
 group :test do
+  gem 'mocha'
   gem "factory_girl_rails", "~> 4.0"
   gem "launchy"
   gem "capybara"

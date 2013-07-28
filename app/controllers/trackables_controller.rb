@@ -7,9 +7,10 @@ class TrackablesController < ApplicationController
   def create
     @trackable = Trackable.new(safe_params)
     @trackable.user_id = current_user.id
-    @trackable.day_id = Day.find_or_create_by(user_id: current_user.id, date: Date.today)
+    @trackable.day_id = current_day.id
     if @trackable.save
-      redirect_to user_path(current_user)
+      flash[:notice] = 'Successfully created trackable'
+      redirect_to user_day_path(current_user, current_day)
     else
       render action: 'new'
     end
@@ -22,4 +23,3 @@ class TrackablesController < ApplicationController
   end
 
 end
-

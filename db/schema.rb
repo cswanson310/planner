@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130727085138) do
+ActiveRecord::Schema.define(version: 20130728224244) do
 
   create_table "days", force: true do |t|
-    t.integer  "user_id",    null: false
+    t.integer  "user_id"
     t.date     "date",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -109,9 +109,9 @@ ActiveRecord::Schema.define(version: 20130727085138) do
 
   create_table "users", force: true do |t|
     t.string   "first_name",      null: false
-    t.string   "last_name",       null: false
+    t.string   "last_name"
     t.string   "email",           null: false
-    t.string   "hashed_password", null: false
+    t.string   "hashed_password"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
