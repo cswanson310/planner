@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "Successfully registered!"
-      redirect_to user_day_path(@user, current_day.id)
+      redirect_to user_day_path(@user, current_day)
     else
       render action: 'new'
     end

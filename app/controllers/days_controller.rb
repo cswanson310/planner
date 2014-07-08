@@ -9,6 +9,6 @@ class DaysController < ApplicationController
 
   def set_user_and_day
     @user = User.friendly.find(params[:user_id])
-    @day = User.friendly.find(params[:id])
+    @day = Day.friendly.find(params[:id])
   end
 end
