@@ -4,7 +4,7 @@ class Day < ActiveRecord::Base
   has_many :trackables
 
   def to_param
-    "#{date.strftime('%m-%e-%y')}"
+    "#{date.strftime('%m-%d-%y')}"
   end
 
   def display_string
